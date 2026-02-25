@@ -1,4 +1,5 @@
 import { mysqlTable, varchar, tinyint, char, date, text, serial, decimal, mysqlEnum, int } from "drizzle-orm/mysql-core";
+import { relations } from "drizzle-orm";
 
 export const tipoUsuario = mysqlTable('tipo_usuario', {
     id: int('id').primaryKey().autoincrement(),
@@ -70,3 +71,63 @@ export const titulacoes = mysqlTable('titulacoes', {
     id: int('id').primaryKey().autoincrement(),
     nome: varchar('nome', { length: 45 }).notNull(),
 });
+
+// -------- RELACIONAMENTOS ---------
+
+// Um tipo de usuário (Admin, Parceiro) pode estar em vários usuários
+export const tipoUsuarioRelations = relations(tipoUsuario, ({ many }) => ({
+    usuarios: many(usuarios),
+}));
+
+// Um usuário pertence a um tipo e pode ter um perfil de parceiro vinculado
+export const usuariosRelations = relations(usuarios, ({ one }) => ({
+    tipoUsuario: one(tipoUsuario, {
+        fields: [usuarios.tipoUsuarioId],
+        references: [tipoUsuario.id],
+    }),
+    parceiro: one(parceiros),
+}));
+
+// Um parceiro é um usuário, tem especialidade e titulação, e atende vários pacientes
+export const parceirosRelations = relations(parceiros, ({ one, many }) => ({
+    usuario: one(usuarios, {
+        fields: [parceiros.cpf],
+        references: [usuarios.cpf],
+    }),
+    especialidade: one(especialidades, {
+        fields: [parceiros.especialidadeId],
+        references: [especialidades.id],
+    }),
+    titulacao: one(titulacoes, {
+        fields: [parceiros.titulacaoId],
+        references: [titulacoes.id],
+    }),
+    pacientes: many(pacientes),
+}));
+
+// Um paciente pertence a um parceiro (dentista) e pode ter vários orçamentos
+export const pacientesRelations = relations(pacientes, ({ one, many }) => ({
+    parceiro: one(parceiros, {
+        fields: [pacientes.cpfParceiro],
+        references: [parceiros.cpf],
+    }),
+    orcamentos: many(orcamentos),
+}));
+
+// Um orçamento pertence a apenas um paciente
+export const orcamentosRelations = relations(orcamentos, ({ one }) => ({
+    paciente: one(pacientes, {
+        fields: [orcamentos.pacienteCpf],
+        references: [pacientes.cpf],
+    }),
+}));
+
+// Uma especialidade pode estar presente em vários parceiros
+export const especialidadesRelations = relations(especialidades, ({ many }) => ({
+    parceiros: many(parceiros),
+}));
+
+// Uma titulação pode estar presente em vários parceiros
+export const titulacoesRelations = relations(titulacoes, ({ many }) => ({
+    parceiros: many(parceiros),
+}));

@@ -28,4 +28,18 @@ export class AdminService {
     async findAllPartners() {
         return this.partnerRepository.findAll();
     }
+
+    async deletePartner(cpf: string) {
+        const existingPartner = await this.partnerRepository.findByCpf(cpf);
+
+        if (!existingPartner) {
+            throw new ConflictException('Parceiro não encontrado');
+        }
+
+        await this.partnerRepository.deletePartner(cpf);
+
+        return {
+            message: 'Parceiro deletado com sucesso'
+        }
+    }
 }

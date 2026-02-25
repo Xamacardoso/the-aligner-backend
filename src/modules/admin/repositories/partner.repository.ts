@@ -58,4 +58,11 @@ export class PartnerRepository {
             }
         })
     }
+
+    async deletePartner(cpf: string) {
+        return this.db.transaction(async (tx) => {
+            await tx.delete(schema.parceiros).where(eq(schema.parceiros.cpf, cpf))
+            await tx.delete(schema.usuarios).where(eq(schema.usuarios.cpf, cpf))
+        })
+    }
 }
