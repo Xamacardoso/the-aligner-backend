@@ -44,10 +44,16 @@ export const pacientes = mysqlTable('pacientes', {
 
     // Dentista parceiro associado
     cpfParceiro: varchar('cpf_parceiro', { length: 11 }).references(() => parceiros.cpf),
+    cnpjParceiro: varchar('cnpj_parceiro', { length: 14 }),
 
     queixaPrincipal: text('queixa_principal'),
     descricaoCaso: text('descricao_caso'),
     descricaoObjetivosTratamento: text('descricao_objetivos_tratamento'),
+
+    // TODO: fazer aquela questao das opcoes por escolha, uma tabela p/ objetivo tratamento e outra pra apinhamento
+    objetivoTratamento: text('objetivo_tratamento'),
+    apinhamento: text('apinhamento'),
+
     observacoes: text('observacoes'),
     inicioTratamento: date('inicio_tratamento'),
 });
