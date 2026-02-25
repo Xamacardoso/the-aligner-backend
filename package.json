@@ -21,7 +21,8 @@
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "ts-node -r tsconfig-paths/register src/core/database/seed.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.997.0",
