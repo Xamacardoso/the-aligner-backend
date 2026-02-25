@@ -1,0 +1,507 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "b8311aa3-75db-4490-a92a-0d44944d2934",
+  "prevId": "e657a523-428f-42d3-96b0-f7fc7c76f2de",
+  "tables": {
+    "especialidades": {
+      "name": "especialidades",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "especialidades_id": {
+          "name": "especialidades_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "orcamentos": {
+      "name": "orcamentos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "paciente_cpf": {
+          "name": "paciente_cpf",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valor": {
+          "name": "valor",
+          "type": "decimal(10,2)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "enum('pendente','aprovado','declinado','cancelado')",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": "'pendente'"
+        },
+        "descricao_tratamento": {
+          "name": "descricao_tratamento",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_criacao": {
+          "name": "data_criacao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "orcamentos_paciente_cpf_pacientes_cpf_fk": {
+          "name": "orcamentos_paciente_cpf_pacientes_cpf_fk",
+          "tableFrom": "orcamentos",
+          "tableTo": "pacientes",
+          "columnsFrom": [
+            "paciente_cpf"
+          ],
+          "columnsTo": [
+            "cpf"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "orcamentos_id": {
+          "name": "orcamentos_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "pacientes": {
+      "name": "pacientes",
+      "columns": {
+        "cpf": {
+          "name": "cpf",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nascimento": {
+          "name": "nascimento",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cpf_parceiro": {
+          "name": "cpf_parceiro",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "queixa_principal": {
+          "name": "queixa_principal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "descricao_caso": {
+          "name": "descricao_caso",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "descricao_objetivos_tratamento": {
+          "name": "descricao_objetivos_tratamento",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "observacoes": {
+          "name": "observacoes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "inicio_tratamento": {
+          "name": "inicio_tratamento",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pacientes_cpf_parceiro_parceiros_cpf_fk": {
+          "name": "pacientes_cpf_parceiro_parceiros_cpf_fk",
+          "tableFrom": "pacientes",
+          "tableTo": "parceiros",
+          "columnsFrom": [
+            "cpf_parceiro"
+          ],
+          "columnsTo": [
+            "cpf"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "pacientes_cpf": {
+          "name": "pacientes_cpf",
+          "columns": [
+            "cpf"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "parceiros": {
+      "name": "parceiros",
+      "columns": {
+        "cpf": {
+          "name": "cpf",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cro": {
+          "name": "cro",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cro_uf": {
+          "name": "cro_uf",
+          "type": "char(2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "telefone": {
+          "name": "telefone",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "especialidade_id": {
+          "name": "especialidade_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "titulacao_id": {
+          "name": "titulacao_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "estabelecimento_cnpj": {
+          "name": "estabelecimento_cnpj",
+          "type": "varchar(14)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "estabelecimento_razao_social": {
+          "name": "estabelecimento_razao_social",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "estabelecimento_endereco": {
+          "name": "estabelecimento_endereco",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "telefone_estabelecimento": {
+          "name": "telefone_estabelecimento",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "complemento": {
+          "name": "complemento",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cep": {
+          "name": "cep",
+          "type": "varchar(8)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "bairro": {
+          "name": "bairro",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cidade": {
+          "name": "cidade",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "uf_estabelecimento": {
+          "name": "uf_estabelecimento",
+          "type": "varchar(2)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "parceiros_cpf_usuarios_cpf_fk": {
+          "name": "parceiros_cpf_usuarios_cpf_fk",
+          "tableFrom": "parceiros",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "cpf"
+          ],
+          "columnsTo": [
+            "cpf"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "parceiros_especialidade_id_especialidades_id_fk": {
+          "name": "parceiros_especialidade_id_especialidades_id_fk",
+          "tableFrom": "parceiros",
+          "tableTo": "especialidades",
+          "columnsFrom": [
+            "especialidade_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "parceiros_titulacao_id_titulacoes_id_fk": {
+          "name": "parceiros_titulacao_id_titulacoes_id_fk",
+          "tableFrom": "parceiros",
+          "tableTo": "titulacoes",
+          "columnsFrom": [
+            "titulacao_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "parceiros_cpf": {
+          "name": "parceiros_cpf",
+          "columns": [
+            "cpf"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "tipo_usuario": {
+      "name": "tipo_usuario",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "descricao": {
+          "name": "descricao",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "tipo_usuario_id": {
+          "name": "tipo_usuario_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "titulacoes": {
+      "name": "titulacoes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "titulacoes_id": {
+          "name": "titulacoes_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "usuarios": {
+      "name": "usuarios",
+      "columns": {
+        "cpf": {
+          "name": "cpf",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(45)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "senha": {
+          "name": "senha",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tipo_usuario_id": {
+          "name": "tipo_usuario_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "usuarios_tipo_usuario_id_tipo_usuario_id_fk": {
+          "name": "usuarios_tipo_usuario_id_tipo_usuario_id_fk",
+          "tableFrom": "usuarios",
+          "tableTo": "tipo_usuario",
+          "columnsFrom": [
+            "tipo_usuario_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "usuarios_cpf": {
+          "name": "usuarios_cpf",
+          "columns": [
+            "cpf"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    }
+  },
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}

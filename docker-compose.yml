@@ -1,0 +1,21 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: the_aligner_mysql
+    restart: always
+    environment:
+      MYSQL_USER: the_aligner_user
+      MYSQL_PASSWORD: the_aligner_password
+      MYSQL_DATABASE: the_aligner_db
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    # Configuração para suportar caracteres especiais e fuso horário
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time-zone='-03:00'
+
+volumes:
+  mysql_data:
+    name: the_aligner_mysql_data
