@@ -78,6 +78,18 @@ export const titulacoes = mysqlTable('titulacoes', {
     nome: varchar('nome', { length: 45 }).notNull(),
 });
 
+// Arquivos relacionados ao paciente
+export const arquivosPaciente = mysqlTable('arquivos_paciente', {
+    id: serial('id').primaryKey(),
+    pacienteCpf: varchar('paciente_cpf', { length: 11 }).notNull().references(() => pacientes.cpf),
+    
+    formato: varchar('formato', { length: 10 }).notNull(),
+    r2key: varchar('r2key', { length: 255 }).notNull(), // chave do arquivo no cloudflare
+    nomeOriginal: varchar('nome_original', { length: 255 }).notNull(),
+
+    dataCriacao: date('data_criacao'),
+});
+
 // -------- RELACIONAMENTOS ---------
 
 // Um tipo de usuário (Admin, Parceiro) pode estar em vários usuários
