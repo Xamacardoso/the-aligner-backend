@@ -29,6 +29,13 @@
       "when": 1772073132546,
       "tag": "0003_wild_princess_powerful",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1772112449755,
+      "tag": "0004_striped_hellion",
+      "breakpoints": true
     }
   ]
 }

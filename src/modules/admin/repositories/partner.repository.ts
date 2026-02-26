@@ -30,6 +30,7 @@ export class PartnerRepository {
             // criando parceiro
             await tx.insert(schema.parceiros).values({
                 cpf: partner.cpf,
+                nome: partner.nome,
                 cro: partner.cro,
                 croUf: partner.croUf,
                 email: partner.email,

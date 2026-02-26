@@ -1,0 +1,1 @@
+ALTER TABLE `parceiros` ADD `nome` varchar(100) NOT NULL;

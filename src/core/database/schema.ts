@@ -18,6 +18,7 @@ export const usuarios = mysqlTable('usuarios', {
 export const parceiros = mysqlTable('parceiros', {
     cpf: varchar('cpf', { length: 11 }).primaryKey().references(() => usuarios.cpf),
     cro: varchar('cro', { length: 20 }).notNull(),
+    nome: varchar('nome', { length: 100 }).notNull(),
     croUf: char('cro_uf', { length: 2 }).notNull(),
     email: varchar('email', { length: 45 }).notNull(),
     telefone: varchar('telefone', { length: 11 }),

@@ -55,6 +55,7 @@ async function main() {
         await db.insert(schema.parceiros).values([
             {
                 cpf: '22222222222',
+                nome: 'Dr. João Silva',
                 cro: '123456',
                 croUf: 'SP',
                 email: 'joao.silva@clinica.com',
@@ -86,7 +87,7 @@ async function main() {
             descricaoObjetivosTratamento: 'Alinhamento dos dentes e correção da mordida.',
 
             objetivoTratamento: 'Alinhamento dos dentes e correção da mordida.',
-            apinhamento: 'Alinhamento dos dentes e correção da mordida.',            
+            apinhamento: 'Alinhamento dos dentes e correção da mordida.',
 
             observacoes: 'Paciente motivado.',
             inicioTratamento: new Date('2024-01-10')
