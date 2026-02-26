@@ -74,28 +74,33 @@ async function main() {
         ]).onDuplicateKeyUpdate({ set: { cro: sql`VALUES(cro)` } });
 
         // 6. Seed pacientes
-        // console.log('Seeding pacientes...');
-        // await db.insert(schema.pacientes).values({
-        //     cpf: '33333333333',
-        //     nome: 'Maria Souza',
-        //     nascimento: '1990-05-15',
-        //     cpfParceiro: '22222222222',
-        //     queixaPrincipal: 'Dentes tortos',
-        //     descricaoCaso: 'Necessita de aparelho ortodôntico fixo.',
-        //     descricaoObjetivosTratamento: 'Alinhamento dos dentes e correção da mordida.',
-        //     observacoes: 'Paciente motivado.',
-        //     inicioTratamento: '2024-01-10'
-        // }).onDuplicateKeyUpdate({ set: { cpf: '33333333333' } });
+        console.log('Seeding pacientes...');
+        await db.insert(schema.pacientes).values({
+            cpf: '33333333333',
+            nome: 'Maria Souza',
+            nascimento: new Date('1990-05-15'),
 
-        // // 7. Seed orcamentos
-        // console.log('Seeding orcamentos...');
-        // await db.insert(schema.orcamentos).values({
-        //     pacienteCpf: '33333333333',
-        //     valor: '5000.00',
-        //     status: 'pendente',
-        //     descricao: 'Aparelho Autoligado',
-        //     dataCriacao: new Date('2024-02-25').toISOString().slice(0, 10)
-        // }).onDuplicateKeyUpdate({ set: { pacienteCpf: '33333333333' } });
+            cpfParceiro: '22222222222',
+            queixaPrincipal: 'Dentes tortos',
+            descricaoCaso: 'Necessita de aparelho ortodôntico fixo.',
+            descricaoObjetivosTratamento: 'Alinhamento dos dentes e correção da mordida.',
+
+            objetivoTratamento: 'Alinhamento dos dentes e correção da mordida.',
+            apinhamento: 'Alinhamento dos dentes e correção da mordida.',            
+
+            observacoes: 'Paciente motivado.',
+            inicioTratamento: new Date('2024-01-10')
+        });
+
+        // 7. Seed orcamentos
+        console.log('Seeding orcamentos...');
+        await db.insert(schema.orcamentos).values({
+            pacienteCpf: '33333333333',
+            valor: '5000.00',
+            status: 'pendente',
+            descricao: 'Aparelho Autoligado',
+            dataCriacao: new Date('2024-02-25')
+        }).onDuplicateKeyUpdate({ set: { pacienteCpf: '33333333333' } });
 
 
         console.log('--- Database Seeding Completed Successfully ---');
