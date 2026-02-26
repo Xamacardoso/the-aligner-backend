@@ -30,7 +30,7 @@ export class PatientRepository {
         await this.db.insert(schema.pacientes).values({
             cpf: patient.cpfPaciente,
             nome: patient.nomePaciente,
-            nascimento: new Date(patient.dataNascimento),
+            nascimento: patient.dataNascimento ? new Date(patient.dataNascimento) : null,
 
             cpfParceiro: patient.cpfParceiro,
             cnpjParceiro: patient.cnpjParceiro,

@@ -51,27 +51,27 @@ export class CreatePatientDto {
     dataNascimento: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     @MaxLength(255)
     descricaoQueixaPrincipal: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     @MaxLength(255)
     descricaoObservacoes: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     @MaxLength(255)
     descricaoObjetivosTratamento: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     @MaxLength(255)
     objetivosTratamento: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     @MaxLength(255)
     apinhamento: string;
 

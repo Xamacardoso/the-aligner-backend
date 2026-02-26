@@ -40,12 +40,12 @@ export class CreatePartnerDto {
 
     @IsString()
     @IsOptional()
-    @Length(10, 11)
+    @MaxLength(11)
     telefone: string;
 
     @IsString()
     @IsOptional()
-    @Length(14, 14)
+    @MaxLength(14)
     cnpj: string;
 
     @IsString()
@@ -54,7 +54,7 @@ export class CreatePartnerDto {
 
     @IsString()
     @IsOptional()
-    @Length(10, 11)
+    @MaxLength(11)
     telefone_estabelecimento: string;
 
     @IsString()
@@ -63,7 +63,7 @@ export class CreatePartnerDto {
 
     @IsString()
     @IsOptional()
-    @Length(8, 8)
+    @MaxLength(8)
     cep: string;
 
     @IsString()
@@ -76,7 +76,7 @@ export class CreatePartnerDto {
 
     @IsString()
     @IsOptional()
-    @Length(2, 2)
+    @MaxLength(2)
     uf_estabelecimento: string;
 
     @IsString()
