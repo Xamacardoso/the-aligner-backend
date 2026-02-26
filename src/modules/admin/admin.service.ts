@@ -1,6 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { PartnerRepository } from './repositories/partner.repository';
 import { CreatePartnerDto } from './dto/create-partner.dto';
+import { UpdatePartnerDto } from './dto/update-partner.dto';
 // import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -40,6 +41,20 @@ export class AdminService {
 
         return {
             message: 'Parceiro deletado com sucesso'
+        }
+    }
+
+    async updatePartner(cpfParceiro: string, partner: UpdatePartnerDto) {
+        const existingPartner = await this.partnerRepository.findByCpf(cpfParceiro);
+
+        if (!existingPartner) {
+            throw new ConflictException('Parceiro não encontrado');
+        }
+
+        await this.partnerRepository.updatePartner(cpfParceiro, partner);
+
+        return {
+            message: 'Parceiro atualizado com sucesso'
         }
     }
 }

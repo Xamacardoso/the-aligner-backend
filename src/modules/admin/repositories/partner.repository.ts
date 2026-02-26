@@ -4,6 +4,7 @@ import { DB_CONNECTION } from "src/core/database/database.module";
 import * as schema from "src/core/database/schema";
 import { CreatePartnerDto } from "../dto/create-partner.dto";
 import { eq } from "drizzle-orm";
+import { UpdatePartnerDto } from "../dto/update-partner.dto";
 
 @Injectable()
 export class PartnerRepository {
@@ -64,6 +65,12 @@ export class PartnerRepository {
         return this.db.transaction(async (tx) => {
             await tx.delete(schema.parceiros).where(eq(schema.parceiros.cpf, cpf))
             await tx.delete(schema.usuarios).where(eq(schema.usuarios.cpf, cpf))
+        })
+    }
+
+    async updatePartner(cpfParceiro: string, partner: UpdatePartnerDto) {
+        return await this.db.transaction(async (tx) => {
+            await tx.update(schema.parceiros).set(partner).where(eq(schema.parceiros.cpf, cpfParceiro))
         })
     }
 }

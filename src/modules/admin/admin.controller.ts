@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
 import { AdminService } from "./admin.service";
 import { CreatePartnerDto } from "./dto/create-partner.dto";
 
@@ -12,6 +12,7 @@ export class AdminController {
         return this.adminService.createPartner(partner);
     }
 
+    // TODO: Implementar filtragem de dados, paginacao, e endpoint(s) de busca individual de parceiro
     @Get('partners')
     async findAllPartners() {
         return this.adminService.findAllPartners();
@@ -20,5 +21,10 @@ export class AdminController {
     @Delete('partners/:cpf')
     async deletePartner(@Param('cpf') cpf: string) {
         return this.adminService.deletePartner(cpf);
+    }
+
+    @Put('partners/:cpfParceiro')
+    async updatePartner(@Param('cpfParceiro') cpfParceiro: string, @Body() partner: CreatePartnerDto) {
+        return this.adminService.updatePartner(cpfParceiro, partner);
     }
 }
