@@ -22,6 +22,13 @@
       "when": 1772044881141,
       "tag": "0002_perpetual_komodo",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1772073132546,
+      "tag": "0003_wild_princess_powerful",
+      "breakpoints": true
     }
   ]
 }
