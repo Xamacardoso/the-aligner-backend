@@ -29,7 +29,7 @@ export class StorageService {
                 Bucket: this.bucketName,
                 Key: fileKey,
                 ContentType: contentType,
-                ACL: 'public-read',
+                // ACL: 'public-read',
             });
 
             const uploadUrl = await getSignedUrl(this.s3Client, command, {

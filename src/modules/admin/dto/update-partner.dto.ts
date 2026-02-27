@@ -72,7 +72,7 @@ export class UpdatePartnerDto {
 
     @IsString()
     @IsOptional()
-    @MaxLength(2)
+    @Length(2, 2)
     uf_estabelecimento: string;
 
     @IsString()
